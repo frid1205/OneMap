@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="MySuite" parallel="tests" thread-count="1" verbose="1">
+	<parameter name="browser" value="chrome"/>
+	<parameter name="headless" value="false"/>
+	<parameter name="url" value="https://www.onemap.gov.sg/"/>
+  	<test name="Search Location" >
+	     <classes>
+	     	<class name="testCases.SearchLocation">
+    			<methods>
+					<include name="searchLocation"/>
+					<include name="dragLocation"/>
+    			</methods>
+	    	</class>
+	    </classes>
+  	</test>
+  	<test name="Draw Tool" >
+	     <classes>
+	     	<class name="testCases.MeasureDistance">
+    			<methods>
+					<include name="drawLine"/>
+    			</methods>
+	    	</class>
+	    </classes>  
+  	</test>
+  	<test name="Test zoom in and zoom out" >
+	     <classes>
+	     	<class name="testCases.ZoomInOut">
+    			<methods>
+					<include name="zoomIn"/>
+					<include name="zoomOut"/>
+    			</methods>
+	    	</class>
+	    </classes>  
+  </test>
+</suite>
