@@ -5,6 +5,11 @@
 3. install chrome 
 4. Install firefox
 
+## Language
+1. Java
+2. TestNG
+3. Javascript
+
 ## Running on Windows
 1. Open OneMap automation project folder
 2. Double click RunProject.bat
