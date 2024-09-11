@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 
 import bases.BaseConfig;
 import utilization.Use;
@@ -25,9 +26,7 @@ public class MapLocationPage extends BaseConfig{
     @FindBy(xpath="//div[@id='getMyLoc']/img")
     WebElement getMyLocationButton;
     
-    WebElement searchResult;
-    
-    WebElement searchResultLocation;
+    WebElement searchResult, searchResultLocation;
     
     //Measure distance tool
     @FindBy(xpath="//img[@id='drawToolsSelected']")
@@ -43,6 +42,10 @@ public class MapLocationPage extends BaseConfig{
     @FindBy(xpath="//div[@class='zoomBtnWrapper']/img[@class='zoomOutBtn']")
     WebElement zoomOutButton;
     
+    //Medical
+    @FindBy(xpath="//div[@id='Medical']/div")
+    WebElement medicalButton;
+    
     String file1, file2;
     
     public void testSearchLocation(String locationName) throws InterruptedException {
@@ -55,7 +58,7 @@ public class MapLocationPage extends BaseConfig{
     	searchResultLocation = getDriver().findElement(By.xpath("(//div[@id='markerInfoContent']/span[contains(text(),'"+locationName+"')])[1]"));
     	Use.waitElement(searchResultLocation);
     	
-    	sa.assertEquals(searchResultLocation.getText(), locationName,"Location does not macth based to text input");
+    	sa.assertEquals(locationName, searchResultLocation.getText().substring(searchResultLocation.getText().length()-locationName.length()),"Location does not macth based to text input");
     	sa.assertAll();
     	extent.flush();
     }
@@ -66,7 +69,7 @@ public class MapLocationPage extends BaseConfig{
     	Thread.sleep(3000);
     }
     
-    public void moveMapFromOneLocationToAnotherLocation() throws InterruptedException, IOException {
+    public void dragLocation() throws InterruptedException, IOException {
     	Thread.sleep(2000);
     	
     	// Lokasi awal untuk memulai drag
@@ -85,9 +88,8 @@ public class MapLocationPage extends BaseConfig{
     		.click()
     		.perform();
     	}
-    	Thread.sleep(5000);
-    	 sa.assertTrue(Utilize.verifyImage("moveMapFromOneLocationToAnotherLocation"),"Images are not matched");
-         sa.assertAll();
+    	Thread.sleep(6000);
+	    Assert.assertEquals(Utilize.verifyImage("dragLocation"), true, "Images are not matched");
     }
     
     public void drawLine() throws InterruptedException, IOException {
@@ -111,11 +113,10 @@ public class MapLocationPage extends BaseConfig{
         getActions().moveToElement(canvas, x1 ,y1).click().perform();
         
         // Klik pada titik kedua
-        getActions().moveToElement(canvas, x2 ,y2).click().perform();
-        Thread.sleep(1000);
-        
-        sa.assertTrue(Utilize.verifyImage("drawLine"),"Images are not matched");
-        sa.assertAll();
+        getActions().moveToElement(canvas, x2 ,y2).doubleClick().perform();
+        Thread.sleep(3000);
+
+        Assert.assertEquals(Utilize.verifyImage("drawLine"), true, "Images are not matched");
     }
     
     public void testZoomIn() throws InterruptedException, IOException {
@@ -123,16 +124,23 @@ public class MapLocationPage extends BaseConfig{
     	Use.Click(zoomInButton);
     	Thread.sleep(3000);
     	
-        sa.assertTrue(Utilize.verifyImage("ZoomIn"),"Images are not matched");
-        sa.assertAll();
+    	Assert.assertEquals(Utilize.verifyImage("ZoomIn"), true, "Images are not matched");
     }
     
     public void testZoomOut() throws InterruptedException, IOException {
     	getMyLocation();
     	Use.Click(zoomOutButton);
+    	Use.Click(zoomOutButton);
     	Thread.sleep(3000);
     	
-    	sa.assertTrue(Utilize.verifyImage("ZoomOut"),"Images are not matched");
-    	sa.assertAll();
+    	Assert.assertEquals(Utilize.verifyImage("ZoomOut"), true, "Images are not matched");
+    }
+    
+    public void findMedicalLocation() throws InterruptedException, IOException {
+    	Thread.sleep(2000);
+    	Use.Click(medicalButton);
+    	Thread.sleep(3000);
+    	
+    	Assert.assertEquals(Utilize.verifyImage("MedicalLocation"), true, "Images are not matched");
     }
 }

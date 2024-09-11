@@ -1,14 +1,29 @@
 package bases;
 
+import java.io.File;
+
 import org.testng.ISuiteListener;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
+import utilization.Utilize;
+
 
 public class TestListener extends BaseConfig implements ISuiteListener, ITestListener {
 	//private static ExtentReports extent = null;
-	
+	static {
+		File dir1 = new File(Utilize.getAbsolutePath("//actualResult//screenshot"));
+		
+		File[] listFiles1 = dir1.listFiles();
+		if(dir1.exists()){
+			for (File file : listFiles1) {
+				file.getName();
+				file.delete();
+			}
+			dir1.delete();
+		}
+	}
 
     @Override
     public void onStart(ITestContext context) {

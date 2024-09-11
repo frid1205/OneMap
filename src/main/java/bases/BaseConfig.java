@@ -29,17 +29,18 @@ public class BaseConfig {
 	private static WebDriverWait wait;
 	private static Actions actions;
 	private static long DEFAULT_TIMEOUT = 30000;
-	public static SoftAssert sa;
+	public static SoftAssert sa, se;
 	public static ExtentReports extent;
 	private static ExtentSparkReporter spark;
 	public static ExtentTest test;
 	private static String actualResultPath;
-	
+	public static String browser;
 	
 	@BeforeSuite
 	@Parameters({ "browser","headless","url"})
 	public void startBrowser(String browser,  String headless,String url) 
 	{
+		BaseConfig.browser = browser;
 		switch (browser.toLowerCase()) {
 	        case "firefox":
 	            setupFirefoxDriver(headless);
@@ -52,15 +53,12 @@ public class BaseConfig {
 		}
 		configureDriver(url);
 		setupExtentReport();
-		
-        sa = new SoftAssert();
+		sa = new SoftAssert();
 	}
 	
-
 	private static void setupChromeDriver(String headless) {
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--start-maximized");
         if (headless.equals("true")) {
             options.addArguments("--headless");
         }
@@ -70,10 +68,14 @@ public class BaseConfig {
 	private static void setupFirefoxDriver(String headless) {
         WebDriverManager.firefoxdriver().setup();
         FirefoxOptions options = new FirefoxOptions();
-        options.addArguments("--start-maximized");
         if (headless.equals("true")) {
             options.addArguments("--headless");
         }
+        // Set preferences for location access
+        options.addPreference("geo.enabled", true); // Enable geolocation
+        options.addPreference("geo.provider.use_corelocation", true); // For MacOS
+        options.addPreference("geo.prompt.testing", true); // Bypass the popup
+        options.addPreference("geo.prompt.testing.allow", true);
         driver = new FirefoxDriver(options);
     }
 	
@@ -81,6 +83,7 @@ public class BaseConfig {
         driver.manage().deleteAllCookies();
         driver.manage().timeouts().pageLoadTimeout(90, TimeUnit.SECONDS);
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().window().maximize();
         actions = new Actions(driver);
         driver.get(url);
         
@@ -116,6 +119,10 @@ public class BaseConfig {
 	public static SoftAssert getSoftAssert() {
         return sa;
     }
+	
+	public static String getBrowser() {
+		return browser;
+	}
 	
 	public static String getActualResultPath() {
 		actualResultPath = Utilize.getAbsolutePath("actualResult/screenshot/");

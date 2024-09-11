@@ -25,7 +25,7 @@ import ru.yandex.qatools.ashot.comparison.ImageDiffer;
 
 public class Utilize extends BaseConfig{
 	private static XSSFWorkbook wb;
-	private static String file1, file2;
+	//public static String file1, file2;
 	
 	public static String getAbsolutePath(String relativePath) {
         String projectRoot = System.getProperty("user.dir");
@@ -86,7 +86,7 @@ public class Utilize extends BaseConfig{
 		return data;
 	}
 	
-	 public static boolean compareImages(String file1, String file2) throws IOException {
+	public static boolean compareImages(String file1, String file2) throws IOException {
 	   	  File expectedImageFile = new File(file1);
 	   	  File actualImageFile = new File(file2);
 	
@@ -106,15 +106,15 @@ public class Utilize extends BaseConfig{
 	 
 	 public static boolean verifyImage(String img) throws IOException {
 		 try {
-				FileUtils.copyFile(Utilize.getscreenshot(), new File("actualResult/screenshot/"+img+".jpg"));
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-	        
-	        file1 = Utilize.getAbsolutePath("\\actualResult\\screenshot\\"+img+".jpg");
-	        file2 = Utilize.getAbsolutePath("\\expectedResult\\screenshot\\"+img+".jpg");
-	        
-	        return compareImages(file1, file2);
+			FileUtils.copyFile(Utilize.getscreenshot(), new File("actualResult/screenshot/"+img+".jpg"));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+        
+        String file1 = Utilize.getAbsolutePath("\\actualResult\\screenshot\\"+img+".jpg");
+        String file2 = Utilize.getAbsolutePath("\\expectedResult\\screenshot\\"+getBrowser()+"\\"+img+".jpg");
+        
+        return compareImages(file1, file2);
 	 }
 	 
 	public static XSSFWorkbook workBook() {

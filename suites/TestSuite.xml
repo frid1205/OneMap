@@ -32,5 +32,14 @@
     			</methods>
 	    	</class>
 	    </classes>  
+  	</test>
+  	<test name="Find public facility" >
+	     <classes>
+	     	<class name="testCases.FindPublicFacility">
+    			<methods>
+					<include name="findMedicalLocation"/>
+    			</methods>
+	    	</class>
+	    </classes>  
   </test>
 </suite>

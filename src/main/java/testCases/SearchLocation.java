@@ -44,7 +44,7 @@ public class SearchLocation extends BaseConfig{
 	@Test
 	public void dragLocation() throws InterruptedException, IOException 
 	{
-		MapLocationPage.moveMapFromOneLocationToAnotherLocation();
+		MapLocationPage.dragLocation();
 	}
 
 }

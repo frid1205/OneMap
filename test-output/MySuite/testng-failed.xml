@@ -4,41 +4,16 @@
   <parameter name="headless" value="false"/>
   <parameter name="browser" value="chrome"/>
   <parameter name="url" value="https://www.onemap.gov.sg/"/>
-  <test thread-count="1" parallel="tests" name="Search Location(failed)">
+  <test thread-count="1" parallel="tests" name="Find public facility(failed)">
     <classes>
-      <class name="testCases.SearchLocation">
+      <class name="testCases.FindPublicFacility">
         <methods>
-          <include name="dragLocation"/>
+          <include name="setUpBeforeClass"/>
+          <include name="findMedicalLocation"/>
           <include name="startBrowser"/>
           <include name="quitDriver"/>
-          <include name="setUpBeforeClass"/>
         </methods>
-      </class> <!-- testCases.SearchLocation -->
+      </class> <!-- testCases.FindPublicFacility -->
     </classes>
-  </test> <!-- Search Location(failed) -->
-  <test thread-count="1" parallel="tests" name="Draw Tool(failed)">
-    <classes>
-      <class name="testCases.MeasureDistance">
-        <methods>
-          <include name="drawLine"/>
-          <include name="startBrowser"/>
-          <include name="quitDriver"/>
-          <include name="setUpBeforeClass"/>
-        </methods>
-      </class> <!-- testCases.MeasureDistance -->
-    </classes>
-  </test> <!-- Draw Tool(failed) -->
-  <test thread-count="1" parallel="tests" name="Test zoom in and zoom out(failed)">
-    <classes>
-      <class name="testCases.ZoomInOut">
-        <methods>
-          <include name="zoomIn"/>
-          <include name="startBrowser"/>
-          <include name="setUpBeforeClass"/>
-          <include name="quitDriver"/>
-          <include name="zoomOut"/>
-        </methods>
-      </class> <!-- testCases.ZoomInOut -->
-    </classes>
-  </test> <!-- Test zoom in and zoom out(failed) -->
+  </test> <!-- Find public facility(failed) -->
 </suite> <!-- Failed suite [MySuite] -->
