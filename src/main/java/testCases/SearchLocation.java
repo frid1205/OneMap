@@ -30,7 +30,7 @@ public class SearchLocation extends BaseConfig{
 	}
 	
 	@Test(dataProvider="data")
-	public void searchLocation(String SearchAddress) throws InterruptedException 
+	public void searchLocationByInput(String SearchAddress) throws InterruptedException 
 	{
 		MapLocationPage.testSearchLocation(SearchAddress);
 	}

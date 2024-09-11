@@ -8,12 +8,6 @@
   <!-- FIXME change it to the project's website -->
   <url>https://www.onemap.gov.sg/</url>
   
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>1.8</maven.compiler.source>
-    <maven.compiler.target>1.8</maven.compiler.target>
-    <suiteXmlFile>testcase/TestSuite.xml</suiteXmlFile>
-  </properties>
   <dependencies>
     <!-- https://mvnrepository.com/artifact/org.testng/testng -->
 	<dependency>
@@ -74,9 +68,6 @@
 	    <version>5.0.5</version>
 	</dependency>
 
-
-
-
 </dependencies>
 	<build>
 	    <pluginManagement>
@@ -86,11 +77,8 @@
 	          <artifactId>maven-surefire-plugin</artifactId>
 	          <version>3.3.0</version>
 	          <configuration>
-	            <source>1.8</source>
-	            <target>1.8</target>
-	            <fork>true</fork>
 	            <suiteXmlFiles>
-	              <suiteXmlFile>testcase/TestSuite.xml</suiteXmlFile>
+	              <suiteXmlFile>suites/TestSuite.xml</suiteXmlFile>
 	            </suiteXmlFiles>
 	          </configuration>
 	        </plugin>

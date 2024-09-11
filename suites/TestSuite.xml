@@ -8,13 +8,13 @@
 	     <classes>
 	     	<class name="testCases.SearchLocation">
     			<methods>
-					<include name="searchLocation"/>
+					<include name="searchLocationByInput"/>
 					<include name="dragLocation"/>
     			</methods>
 	    	</class>
 	    </classes>
   	</test>
-  	<test name="Draw Tool" >
+  	<test name="Drawing Tool" >
 	     <classes>
 	     	<class name="testCases.MeasureDistance">
     			<methods>
@@ -41,5 +41,5 @@
     			</methods>
 	    	</class>
 	    </classes>  
-  </test>
+  	</test>
 </suite>
