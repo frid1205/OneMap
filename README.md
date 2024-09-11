@@ -23,3 +23,4 @@
 ### Note
 1. For first case "Search Location by input" i'm using data provider, so you can add new location in testdata/SearchAddress.xlsx.
 2. Due to unable to find element in canvas, i use coordinate to click and move the cursor, and for assertion i'm using comparing image. 
+3. Test result can be found in project folder, i named as index.html (using extent report)
